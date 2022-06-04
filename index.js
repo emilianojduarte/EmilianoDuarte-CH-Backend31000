@@ -28,7 +28,7 @@ class Contenedor{
     async getAll () {
         //leo el archivo y lo guardo en una variable que luego retorno
         let listadoProductos = JSON.parse(await fs.promises.readFile(`./${this.archivo}.json`, 'utf-8'));
-        console.log("Resultado de la promero getAll: ", listadoProductos);
+        console.log("Listado traido de la promesa: ", listadoProductos);
         return listadoProductos;
     }
 }
@@ -36,34 +36,29 @@ class Contenedor{
 const express = require('express');
 const app = express();
 const puerto = 8080;
-let visitas = 0;
 //listado de productos
-const testProductos = new Contenedor("productos");
+const productos = new Contenedor("productos");
 
 //--------------------------------------------//
 //APLICACION
-
-app.use((req, res, next) => {
-    visitas++;
-    next();
-})
-
 
 app.get('/', (req, res) => {
     res.send('<h1 style="color: blue">Bienvenidos al server de Express</h1>');
 })
 
 app.get('/productos', (req, res) => {
-    res.send(`Listado completo de productos:
-    ${testProductos.getAll()}
-    `);
+    const listado = productos.getAll();
+    res.send(`Listado completo de productos: ${listado}`);
 })
 
-app.get('/fyh', (req, res) => {
-    const date = new Date();
-    res.json({fyh: date.toLocaleString()});
+app.get('/productoRandom', (req, res) => {
+    function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min) ) + min;
+    }
+    const resultado = productos.getById(getRndInteger(1,12));
+    console.log("El numero aleatorio es: ", resultado)
+    res.send(`Prodcuto aleatorio: ${resultado}`)
 })
-
 
 app.listen(puerto, (error) => {
     if(!error){
