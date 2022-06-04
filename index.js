@@ -28,6 +28,7 @@ class Contenedor{
     async getAll () {
         //leo el archivo y lo guardo en una variable que luego retorno
         let listadoProductos = JSON.parse(await fs.promises.readFile(`./${this.archivo}.json`, 'utf-8'));
+        console.log("Resultado de la promero getAll: ", listadoProductos);
         return listadoProductos;
     }
 }
