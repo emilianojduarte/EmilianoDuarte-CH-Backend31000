@@ -1,1 +1,0 @@
-[{"title":"producto2","price":23000,"url":"el url que le puse","id":1},{"title":"producto3","price":56000,"url":"el url que le puse","id":2}]
