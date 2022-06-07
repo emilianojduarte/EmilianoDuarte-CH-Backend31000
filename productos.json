@@ -2,7 +2,7 @@
     {
         "id": 1,
         "type": "ram",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/ram1.jpg",
+        "url": "url_del_id_1",
         "enviogratis": false,
         "recomendado": true,
         "price": 3500,
@@ -11,7 +11,7 @@
     {
         "id": 2,
         "type": "ram",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/ram2.jpg",
+        "url": "url_del_id_2",
         "enviogratis": true,
         "recomendado": false,
         "price": 5499,
@@ -20,7 +20,7 @@
     {
         "id": 3,
         "type": "ram",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/ram3.jpg",
+        "url": "url_del_id_3",
         "enviogratis": true,
         "recomendado": true,
         "price": 16108,
@@ -29,7 +29,7 @@
     {
         "id": 4,
         "type": "cpuintel",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/i3.jpg",
+        "url": "url_del_id_4",
         "enviogratis": true,
         "recomendado": true,
         "price": 26950,
@@ -38,7 +38,7 @@
     {
         "id": 5,
         "type": "cpuintel",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/i5.jpg",
+        "url": "url_del_id_5",
         "enviogratis": true,
         "recomendado": true,
         "price": 24999,
@@ -47,7 +47,7 @@
     {
         "id": 6,
         "type": "cpuintel",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/i7.jpg",
+        "url": "url_del_id_6",
         "enviogratis": false,
         "recomendado": true,
         "price": 43399,
@@ -56,7 +56,7 @@
     {
         "id": 7,
         "type": "cpuintel",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/i9.jpg",
+        "url": "url_del_id_7",
         "enviogratis": true,
         "recomendado": false,
         "price": 55900,
@@ -65,7 +65,7 @@
     {
         "id": 8,
         "type": "cpuamd",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/r3.jpg",
+        "url": "url_del_id_8",
         "enviogratis": true,
         "recomendado": false,
         "price": 32662,
@@ -74,7 +74,7 @@
     {
         "id": 9,
         "type": "cpuamd",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/r5.jpg",
+        "url": "url_del_id_9",
         "enviogratis": false,
         "recomendado": true,
         "price": 41999,
@@ -83,7 +83,7 @@
     {
         "id": 10,
         "type": "cpuamd",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/r7.jpg",
+        "url": "url_del_id_10",
         "enviogratis": true,
         "recomendado": true,
         "price": 61722,
@@ -92,7 +92,7 @@
     {
         "id": 11,
         "type": "cpuamd",
-        "url": "https://emilianojduarte.github.io/SystemmediumJS/images/r9.jpg",
+        "url": "url_del_id_11",
         "enviogratis": true,
         "recomendado": false,
         "price": 77400,

@@ -22,13 +22,11 @@ class Contenedor{
             resultado = null;
         }
         //y retorno el resultado
-        console.log("El resultado es: ", resultado)
         return resultado
     }
     async getAll () {
         //leo el archivo y lo guardo en una variable que luego retorno
         let listadoProductos = JSON.parse(await fs.promises.readFile(`./${this.archivo}.json`, 'utf-8'));
-        console.log("Listado traido de la promesa: ", listadoProductos);
         return listadoProductos;
     }
 }
@@ -47,17 +45,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/productos', (req, res) => {
-    const listado = productos.getAll();
-    res.send(`Listado completo de productos: ${listado}`);
+    productos.getAll().then(resultado =>{
+        res.send(`Listado completo de productos: ${JSON.stringify(resultado)}`)
+    });
 })
 
 app.get('/productoRandom', (req, res) => {
     function getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min) ) + min;
     }
-    const resultado = productos.getById(getRndInteger(1,12));
-    console.log("El numero aleatorio es: ", resultado)
-    res.send(`Prodcuto aleatorio: ${resultado}`)
+    productos.getById(getRndInteger(1,12)).then(resultado => {
+        res.send(`Producto aleatorio: ${JSON.stringify(resultado)}`)
+    });
 })
 
 app.listen(puerto, (error) => {
