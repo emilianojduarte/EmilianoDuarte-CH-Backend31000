@@ -127,7 +127,7 @@ router.get('/:id', (req, res) => {
     } else {
         resultado = {error: 'El producto no existe'};
     }
-    res.send(resultado);
+    res.json(resultado);
 })
 //put sobre un producto específico
 router.put('/:id', (req, res) => {
@@ -141,7 +141,7 @@ router.put('/:id', (req, res) => {
         productos[indiceEncontrado] = req.body;
         resultado = "Producto actualizado con exito"
     }
-    res.send(resultado)
+    res.json(resultado)
 })
 //delete sobre un producto específico
 router.delete('/:id', (req, res) =>{
@@ -150,12 +150,12 @@ router.delete('/:id', (req, res) =>{
     });
     let resultado = "";
     if (indiceEncontrado === -1) {
-        resultado = "Producto no encontrado"
+        resultado = {error: 'El producto no existe'}
     } else {
         productos.splice(indiceEncontrado, 1);
         resultado = "Producto eliminado con éxito"
     }
-    res.send(resultado);
+    res.json(resultado);
 })
 //export
 module.exports = router; 
