@@ -131,22 +131,22 @@ router.get('/:id', (req, res) => {
 })
 //put sobre un producto específico
 router.put('/:id', (req, res) => {
-    const { id, type, url, enviogratis, recomendado, price, description } = req.body
+    let resultado
     const indiceEncontrado = productos.findIndex((producto) => {
-        return producto.id === id;
+        return producto.id == req.params.id;
     });
     if (indiceEncontrado === -1) {
-        return;
+        resultado = {error: 'El producto no existe'}
     } else {
         productos[indiceEncontrado] = req.body;
+        resultado = "Producto actualizado con exito"
     }
-    res.sendStatus(200);
+    res.send(resultado)
 })
 //delete sobre un producto específico
 router.delete('/:id', (req, res) =>{
-    const { id, type, url, enviogratis, recomendado, price, description } = req.body
     const indiceEncontrado = productos.findIndex((producto) => {
-        return producto.id === id;
+        return producto.id == req.params.id;
     });
     let resultado = "";
     if (indiceEncontrado === -1) {
