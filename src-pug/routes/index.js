@@ -3,8 +3,8 @@ const router = Router();
 const productsRoutes = require('./productsRoutes');
 
 //home
-router.get('/home', (req, res) => {
-    res.send('Estas en home')
+router.get('/', (req, res) => {
+    res.render('blockForm.pug');
 })
 //productos
 router.use('/productos', productsRoutes);

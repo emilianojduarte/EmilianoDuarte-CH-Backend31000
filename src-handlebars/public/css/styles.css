@@ -1,0 +1,44 @@
+/* -------- Reseto general y para pisar estilos del bootstrap-------------- */
+* {
+    margin: 0;
+    padding: 0;
+    color: black;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    align-self: center;
+    line-height: normal;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    color: inherit;
+    cursor: pointer;
+}
+/* --------------- Header  -------------- */
+header{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: black;
+}
+header div{
+    color: aliceblue;
+}
+header div nav ul{
+    display: inline-flex;
+    margin-bottom: 0rem; /*Correccion al bootstrap*/
+}
+header div nav ul li{
+    padding-inline: 1em;
+    color: aliceblue;
+}
+/* ---------------- Title ---------------------*/
+h1{
+    font-size: 2rem;
+    text-align: center;
+    margin: 2em;
+}

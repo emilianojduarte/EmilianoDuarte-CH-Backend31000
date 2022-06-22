@@ -1,0 +1,29 @@
+extends main.pug 
+
+block blockForm
+    h1 Agregar Productos
+    section(class="container")
+        div(class="col-1")
+        form(action="/productos", autocomplete="off", class="col-10", method="POST")
+            div(class="mb-3")
+                label(for="type", class="form-label") Tipo 
+                input(type="text", class="form-control", placeholder="Ingrese el tipo", name="type", required)
+            div(class="mb-3")
+                label(for="url", class="form-label") Direccion de Imagen 
+                input(type="text", class="form-control", placeholder="Ingrese URL de imagen", name="url", required)
+            div(class="mb-3")
+                label(for="enviogratis", class="form-label") Envio Gratis 
+                input(type="text", class="form-control", placeholder="Ingrese 0 por no o 1 por si", name="enviogratis", required)
+            div(class="mb-3")
+                label(for="recomendado", class="form-label") Producto Recomendado 
+                input(type="text", class="form-control", placeholder="Ingrese 0 por no o 1 por si", name="recomendado", required)
+            div(class="mb-3")
+                label(for="price", class="form-label") Precio en pesos
+                input(type="number", class="form-control", placeholder="Ingrese el precio", name="price", required)
+            div(class="mb-3")
+                label(for="description", class="form-label") Descripcion
+                input(type="text", class="form-control", placeholder="Ingrese la descripcion", name="description", required)
+            div(class="mb-3")
+                button(type="submit", class="btn btn-dark") Enviar 
+                button(type="reset", class="btn btn-dark") Limpiar
+        div(class="col-1")
