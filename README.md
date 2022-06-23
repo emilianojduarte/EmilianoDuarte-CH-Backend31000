@@ -12,5 +12,5 @@ De la siguiente manera:
 
 2 - "start": "nodemon ./src-pug/server.js"
 
-3 - "start": "nodemon ./src-ejs/server.js" --> PENDIENTE
+3 - "start": "nodemon ./src-ejs/server.js"
   
