@@ -3,8 +3,10 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const rutas = require('./routes/index.routes.js')
-const puerto = 8080;
+const rutas = require('./routes/index.routes.js');
+//env
+require('dotenv').config();
+const puerto = process.env.PORT;
 //conf para acceder al body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

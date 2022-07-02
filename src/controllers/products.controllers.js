@@ -9,7 +9,7 @@ const getProducts = (req, res) => {
             res.send(resultado);
         })
     } catch (error) {
-        console.log('Ocurrio el siguiente error al querer obtener lso productos', error);
+        console.log('Ocurrio el siguiente error al querer obtener los productos', error);
         res.sendStatus(500);
     }
     
@@ -55,4 +55,4 @@ const removeProduct = (req, res) => {
 }
 
 //export
-module.exports = {getProducts, getProduct, addProduct, updateProduct, removeProduct};
+module.exports = { getProducts, getProduct, addProduct, updateProduct, removeProduct };

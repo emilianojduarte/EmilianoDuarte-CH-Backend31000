@@ -49,7 +49,7 @@ class Contenedor{
             return producto.id == id;
         });
         let resultado;
-        if (indiceEncontrado){
+        if (indiceEncontrado >= 0){
             //si existe, actualizo
             productInfo.timestamp = new Date().toLocaleString("fr-FR");
             const { id, timestamp, nombre, description, codigo, url, price, stock } = productInfo;
@@ -69,7 +69,7 @@ class Contenedor{
             return producto.id == id;
         });
         let resultado;
-        if (indiceEncontrado){
+        if (indiceEncontrado >= 0){
             //si existe, lo elimino del array con split
             listadoProductos.splice(indiceEncontrado, 1);
             await fs.promises.writeFile('./src/utils/dbProductos.json', JSON.stringify(listadoProductos));
