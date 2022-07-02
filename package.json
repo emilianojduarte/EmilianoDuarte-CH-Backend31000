@@ -1,18 +1,19 @@
 {
-  "name": "clase-6",
+  "name": "proyecto-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./server.js"
+    "start": "nodemon ./src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Emiliano Duarte",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.16"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "express": "^4.18.1"
   }
 }
