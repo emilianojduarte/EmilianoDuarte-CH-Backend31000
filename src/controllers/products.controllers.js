@@ -24,7 +24,7 @@ const getProduct = (req, res) => {
         res.sendStatus(500);
     }
 }
-const addProduct = (req, res) => {
+const postProduct = (req, res) => {
     try {
         archivo.addOne(req.body);
         res.sendStatus(200);
@@ -33,7 +33,7 @@ const addProduct = (req, res) => {
         res.sendStatus(500);
     }
 }
-const updateProduct = (req, res) => {
+const putProduct = (req, res) => {
     try {
         archivo.updateOne(req.params.id, req.body).then(resultado => {
             res.send(resultado);
@@ -43,7 +43,7 @@ const updateProduct = (req, res) => {
         res.sendStatus(500);
     }
 }
-const removeProduct = (req, res) => {
+const deleteProduct = (req, res) => {
     try {
         archivo.deleteOne(req.params.id).then(resultado => {
             res.send(resultado);
@@ -55,4 +55,4 @@ const removeProduct = (req, res) => {
 }
 
 //export
-module.exports = { getProducts, getProduct, addProduct, updateProduct, removeProduct };
+module.exports = { getProducts, getProduct, postProduct, putProduct, deleteProduct };

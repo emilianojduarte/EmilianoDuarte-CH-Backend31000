@@ -18,6 +18,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 //APLICACION
 app.use('/api', rutas);
 
+app.use('/*', (req, res) =>{
+    res.status(404).send({ error : -2, descripcion: `Ruta ${req.url} con método ${req.method} aún no implementada` });
+})
+
 //listen
 app.listen(puerto, (error) => {
     try{

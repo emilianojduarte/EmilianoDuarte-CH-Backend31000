@@ -4,19 +4,17 @@ const fs = require('fs');
 const Contenedor = require('./contenedor.utils');
 const baseProductos = new Contenedor();
 
-//clases
+//CLASE
 class Compras{
-    //constructor
     constructor(archivo){
         this.archivo = "dbCompras";
     }
-    //métodos
     async createCart () {
         //creo un ID con nanoid
         const id = await import('nanoid').then(module =>{ return module.nanoid(5)});
         //leo el archivo y lo guardo en una variable
         let listadoCompras = JSON.parse(await fs.promises.readFile('./src/utils/dbCompras.json', 'utf-8'));
-        //creo el carrito
+        //creo el nuevo carrito
         const nuevoCarrtio = {id: id, timestamp: new Date().toLocaleString("fr-FR"), productos: []};
         console.log(nuevoCarrtio);
         //pusheo el carrtito en el array

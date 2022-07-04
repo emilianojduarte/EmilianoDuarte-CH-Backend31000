@@ -1,13 +1,11 @@
 //DECLARACIONES
-//fs
 const fs = require('fs');
-//clases
+
+//CLASE
 class Contenedor{
-    //constructor
     constructor(archivo){
         this.archivo = "dbProductos";
     }
-    //métodos
     async getById (id) {
         //Para encontrar el ID primero levanto lo que tengo en el archivo
         let listadoProductos = JSON.parse(await fs.promises.readFile('./src/utils/dbProductos.json', 'utf-8'));
