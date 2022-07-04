@@ -1,4 +1,0 @@
-FechaYHora: 27/06/2022 22:43:48, UserName: user@nose.com, Mensaje: mensaje diferente x2
-FechaYHora: 27/06/2022 22:43:51, UserName: user@nose.com, Mensaje: mensaje diferente x3
-FechaYHora: 27/06/2022 22:43:53, UserName: user@nose.com, Mensaje: mensaje diferente x34
-FechaYHora: 27/06/2022 22:44:06, UserName: user@nose.com, Mensaje: mensaje diferente x65465
