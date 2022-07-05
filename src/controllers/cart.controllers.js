@@ -4,14 +4,14 @@ const archivo = new Compras();
 
 //funciones
 const getNewCart = (req, res) => {
-    try {
-        archivo.createCart().then(resultado =>{
+        archivo.createCart().
+        then(resultado =>{
             res.send(resultado);
-        });
-    } catch (error) {
-        console.log('Ocurrio el siguiente error al querer crear un nuevo carrito', error);
-        res.sendStatus(500);
-    }
+        })
+        .catch(error =>{
+            console.log('Ocurrio el siguiente error al querer crear un nuevo carrito', error);
+            res.sendStatus(500);
+        }) 
 }
 const deleteCart = (req, res) => {
     try {
