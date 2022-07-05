@@ -16,7 +16,6 @@ class Compras{
         let listadoCompras = JSON.parse(await fs.promises.readFile('./src/utils/dbCompras.json', 'utf-8'));
         //creo el nuevo carrito
         const nuevoCarrtio = {id: id, timestamp: new Date().toLocaleString("fr-FR"), productos: []};
-        console.log(nuevoCarrtio);
         //pusheo el carrtito en el array
         listadoCompras.push(nuevoCarrtio);
         //y lo escribo
