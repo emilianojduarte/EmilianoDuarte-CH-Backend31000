@@ -54,7 +54,7 @@ io.on('connection', (socket) => {
         io.emit('server:msgs', msgArray)
     })
     socket.on('disconnect', () => {
-        console.log(`Se deconectó el cliente ${socket,id}`)
+        console.log(`Se deconectó el cliente ${socket.id}`)
     })
 })
 
