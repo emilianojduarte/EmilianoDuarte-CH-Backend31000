@@ -1,0 +1,28 @@
+/* ------------------ Container -----------------*/
+.sect {
+    background-color:darkseagreen;
+    margin: 1em;
+    border-radius: 1em;
+}
+/* ---- Pool de mensajes ----*/
+#msgsPool{
+    background-color: white;
+    border-radius: 0.5em;
+    margin: 1em;
+    margin: 0;
+}
+#msgsPool .msgsPool-user{
+    font-weight: bold;
+    color: blue;
+}
+#msgsPool .msgsPool-date{
+    color: brown;
+}
+#msgsPool .msgsPool-msg{
+    font-style: italic;
+    color: green;
+}
+/* ---- Formulario de mensajes ----*/
+#msgForm{
+    padding: 1em;
+}
