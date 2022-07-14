@@ -43,13 +43,18 @@ function Chat ()  {
                     <div className="col-1"></div>
                     <div className="col-10">
                         <div id="msgsPool">
-                            {arrayMensajes.map((msgInfo , i) => (
-                                <div key={i}>
-                                    <span className="msgsPool-user">{msgInfo.username}</span>
-                                    [<span className="msgsPool-date">{msgInfo.time}</span>]: 
-                                    <span className="msgsPool-msg">{msgInfo.message}</span>
-                                </div>
-                            ))}
+                            {arrayMensajes?(
+                                arrayMensajes.map((msgInfo , i) => (
+                                    <div key={i}>
+                                        <span className="msgsPool-user">{msgInfo.username}</span>
+                                        [<span className="msgsPool-date">{msgInfo.time}</span>]: 
+                                        <span className="msgsPool-msg">{msgInfo.message}</span>
+                                    </div>
+                                ))
+                            ):(
+                                <div>No hay mensajes en el chat. Se el primero! :D</div>
+                            )
+                            }
                             <div ref={divRef}></div>
                         </div>
                         <form id="msgForm" autoComplete="off" className="col-12" onSubmit={handleSubmitMsg}>
@@ -63,7 +68,7 @@ function Chat ()  {
                                 <div className="col-6">
                                     <label htmlFor="msg" className="form-label">Mensaje</label>
                                     <input id="msgInput" type="text" className="form-control" placeholder="Ingrese el mensaje a enviar" 
-                                        name="msg" required value={mensaje} onChange={(e)=> setMensaje(e.target.value)}
+                                        name="msg" maxLength={200} required value={mensaje} onChange={(e)=> setMensaje(e.target.value)}
                                     />
                                 </div>
                             </div>

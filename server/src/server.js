@@ -27,13 +27,15 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         origin: "*",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST", "PUT", "DELETE"]
     }
 });
 
-//array msg
-const msgArray = [];
-
+//db handlers
+const Mensajes = require('./utils/mensages.utils');
+const dbMsg = new Mensajes;
+const Contenedor = require('./utils/contenedor.utils');
+const dbProducts = new Contenedor;
 //--------------------------------------------//
 
 //APLICACION
@@ -45,14 +47,26 @@ app.use('/*', (req, res) =>{
 })
 
 //io sockets
-io.on('connection', (socket) => {
+io.on('connection', async socket => {
+    //connect
     console.log('Se conectó el cliente con id: ', socket.id);
-    socket.emit('server:msgs', msgArray);
-    socket.on('client:msg', msgInfo => {
-        msgArray.push(msgInfo);
-        //dbChats.save(msgInfo);
-        io.emit('server:msgs', msgArray)
+    //productos
+    let arrayProductos = await dbProducts.getAll();
+    socket.emit('server:products', arrayProductos);
+    socket.on('client:product', async productInfo => {
+        await dbProducts.addProductToDB(productInfo);
+        arrayProductos = await dbProducts.getAll();
+        io.emit('server:products', arrayProductos);
     })
+    //mensajes
+    let arrayMensajes = await dbMsg.getAllMsgs();
+    socket.emit('server:msgs', arrayMensajes);
+    socket.on('client:msg', async msgInfo => {
+        await dbMsg.addMsgToDB(msgInfo);
+        arrayMensajes = await dbMsg.getAllMsgs();
+        io.emit('server:msgs', arrayMensajes);
+    })
+    //disconnect
     socket.on('disconnect', () => {
         console.log(`Se deconectó el cliente ${socket.id}`)
     })
