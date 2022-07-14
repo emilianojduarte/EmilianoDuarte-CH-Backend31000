@@ -24,16 +24,46 @@ class Contenedor{
         }
     }
     async getById (id) {
-        //PENDIENTE DE ACTUALIZAR CON LA DB
-        return
+        try {
+            let resultado;
+            const busqueda = await dbProductos.from('products').where({id});
+            if (busqueda != []){
+                resultado = busqueda
+            } else {
+                resultado = "El producto no existe";
+            }
+            return resultado;
+        } catch (error) {
+            console.log(`Error al querer obtener el producto con ID: ${id}`);
+        }
     }
     async updateOne (id, productInfo) {
-        //PENDIENTE DE ACTUALIZAR CON LA DB
-        return resultado
+        try {
+            let resultado;
+            const devolucion = await dbProductos.from('products').where('id', '=', id).update(productInfo);
+            if (devolucion != 0) {
+                resultado = `El producto con ID ${id} fue actualizado correctamente`;
+            } else {
+                resultado = `El producto con ID ${id} no pudo ser encontrado o no existe`;
+            }
+            return resultado;
+        } catch (error) {
+            console.log("Ocurrio el siguiente error al querer actualizar el producto con ID ", id);
+        }
     }
     async deleteOne (id) {
-        //PENDIENTE DE ACTUALIZAR CON LA DB
-        return
+        try {
+            let resultado;
+            const devolucion = await dbProductos('products').where({id}).del();
+            if (devolucion != 0) {
+                resultado = `El producto con ID ${id} fue borrado correctamente`;
+            } else {
+                resultado = `El producto con ID ${id} no pudo ser encontrado o no existe`;
+            }
+            return resultado;
+        } catch (err) {
+            console.log("Ocurrio el siguiente error al querer borrar el producto con ID ", id);
+        }
     }
 }
 
