@@ -1,7 +1,7 @@
 //IMPORT
 import ContenedorMongo from "../../contenedores/mongo.contenedores.js";
 
-//CLASS EXTENS
+//CLASS EXTENDS
 class ProductDaoMongo extends ContenedorMongo {
     constructor() {
         super ("productos", {

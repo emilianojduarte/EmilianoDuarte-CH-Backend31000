@@ -1,6 +1,5 @@
 //clase contenedora del archivo para la persistencia
 import { CartDao } from '../daos/index.daos.js';
-import { getProduct } from './products.controllers.js';
 
 //funciones
 const getNewCart = async (req, res) => {
