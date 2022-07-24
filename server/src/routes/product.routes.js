@@ -1,10 +1,10 @@
 //DECLARACIONES
-const { Router } = require('express');
+import { Router } from 'express';
 const router = Router();
 //imports
-const { getProducts, getProduct, postProduct, putProduct, deleteProduct } = require('../controllers/products.controllers');
+import { getProducts, getProduct, postProduct, putProduct, deleteProduct } from '../controllers/products.controllers.js';
 //import de midlewares
-const { checkAuthorization } = require('../middlewares/middlewares');
+import { checkAuthorization } from '../middlewares/middlewares.js';
 
 //ACCIONES
 router.get('/', getProducts);
@@ -14,4 +14,4 @@ router.put('/:id', checkAuthorization, putProduct);
 router.delete('/:id', checkAuthorization, deleteProduct);
 
 //export
-module.exports = router; 
+export default router;

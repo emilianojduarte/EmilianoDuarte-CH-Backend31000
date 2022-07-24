@@ -1,16 +1,20 @@
 //DECLARACIONES
 //express
-const express = require('express');
+import express from "express";
 const app = express();
-const http = require("http");
-const cors = require("cors");
+import http from "http";
+import cors from "cors";
 
 //rutas
-const path = require('path');
-const rutas = require('./routes/index.routes.js');
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import rutas from "./routes/index.routes.js"
 
 //env
-require('dotenv').config();
+import dotenv from "dotenv"
+dotenv.config();
 const puerto = process.env.PORT;
 
 //conf para acceder al body
@@ -21,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 //io server y cors
-const { Server } = require('socket.io');
+import { Server } from "socket.io";
 app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -32,9 +36,9 @@ const io = new Server(server, {
 });
 
 //db handlers
-const Mensajes = require('./utils/mensages.utils');
+import Mensajes from "./utils/mensages.utils.js"
 const dbMsg = new Mensajes;
-const Contenedor = require('./utils/contenedor.utils');
+import Contenedor from "./utils/contenedor.utils.js";
 const dbProducts = new Contenedor;
 //--------------------------------------------//
 

@@ -1,5 +1,5 @@
 //CONEXION
-const dbChat = require('../db/dbSqliteConnection');
+import dbChat from "../db/dbSqliteConnection.js";
 
 //CLASE
 class Mensajes {
@@ -24,4 +24,4 @@ class Mensajes {
 }
 
 //export
-module.exports = Mensajes;
+export default Mensajes;

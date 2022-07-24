@@ -1,4 +1,4 @@
-const knex = require('knex');
+import knex from 'knex';
 
 const configSQLite3 = {
     client: "sqlite3",
@@ -8,4 +8,4 @@ const configSQLite3 = {
 
 const dbSqliteConnection = knex(configSQLite3);
 
-module.exports = dbSqliteConnection;
+export default dbSqliteConnection;

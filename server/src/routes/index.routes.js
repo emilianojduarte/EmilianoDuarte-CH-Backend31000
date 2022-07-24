@@ -1,8 +1,9 @@
-const { Router } = require('express');
+//IMPORTS
+import { Router } from "express"
 const router = Router();
-const productsRoutes = require('./product.routes');
-const cartRoutes = require('./cart.routes');
-const path = require('path');
+import productsRoutes from "./product.routes.js";
+import cartRoutes from './cart.routes.js';
+import path from "path"
 //home
 router.get('/home', (req, res) => {
     try {
@@ -17,4 +18,4 @@ router.use('/productos', productsRoutes);
 //carrito
 router.use('/carrito/', cartRoutes);
 //export
-module.exports = router;
+export default router;

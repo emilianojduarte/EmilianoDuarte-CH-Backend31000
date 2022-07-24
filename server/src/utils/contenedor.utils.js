@@ -1,5 +1,5 @@
 //CONEXION
-const dbProductos = require('../db/dbMariaConnecion');
+import dbProductos from "../db/dbMariaConnecion.js"
 
 //CLASE
 class Contenedor{
@@ -68,4 +68,4 @@ class Contenedor{
 }
 
 //export
-module.exports = Contenedor;
+export default Contenedor;

@@ -1,7 +1,7 @@
 //DECLARACIONES
-const fs = require('fs');
+import fs from "fs"
 //me traigo la base de productos para poder consultarla
-const Contenedor = require('./contenedor.utils');
+import Contenedor from "./contenedor.utils.js";
 const baseProductos = new Contenedor();
 
 //CLASE
@@ -100,4 +100,4 @@ class Compras{
 }
 
 //export
-module.exports = Compras;
+export default Compras;

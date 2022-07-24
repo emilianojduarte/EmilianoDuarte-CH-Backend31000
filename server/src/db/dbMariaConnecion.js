@@ -1,4 +1,5 @@
-const knex = require('knex')
+import knex from 'knex';
+
 const configMariaDB = {
     client: "mysql",
     connection: {
@@ -9,6 +10,7 @@ const configMariaDB = {
     },
     pool: { min: 0, max: 7 },
 }
+
 const dbMariaConnection = knex(configMariaDB)
 
-module.exports = dbMariaConnection;
+export default dbMariaConnection;
