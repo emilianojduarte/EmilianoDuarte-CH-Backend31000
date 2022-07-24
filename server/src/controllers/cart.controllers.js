@@ -44,11 +44,11 @@ const postProductToCart = async (req, res) => {
         res.sendStatus(500);
     }
 }
-const deleteProductFromCart = (req, res) => {
+const deleteProductFromCart = async (req, res) => {
     try {
-        archivo.deleteOneFromCart(req.params.id, req.params.id_prod).then(resultado => {
-            res.send(resultado);
-        })
+        let resultado = await CartDao.borrarDelCarrito(req.params.id, req.params.id_prod);
+        console.log("Resultado: ", resultado);
+        res.sendStatus(200);
     } catch (error) {
         console.log('Ocurrio el siguiente error al querer eliminar el producto del carrito', error);
         res.sendStatus(500);

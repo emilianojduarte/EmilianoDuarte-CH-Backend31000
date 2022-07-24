@@ -61,15 +61,35 @@ class ContenedorMongo {
     async guardarEnCarrito ( idCart, elemento) {
         let resultado;
         let tempCart = await this.listarUno(idCart);
-        console.log("tempCart: ", tempCart);
         if ( tempCart ){
             tempCart.productos.push(elemento);
-            console.log("tempCart despues del push", tempCart);
-            this.actualizar(idCart, tempCart);
+            await this.actualizar(idCart, tempCart);
+            resultado = "Producto agregado en carrito correctamente";
         } else {
             resultado = "El id de carrito no existe";
         }
         return resultado
+    }
+
+    async borrarDelCarrito (idCart, idProduct) {
+        let resultado;
+        let tempCart = await this.listarUno(idCart);
+        if (tempCart){
+            let arrayProducts = tempCart.productos;
+            const indiceEncontrado = arrayProducts.findIndex((producto) => {
+                return producto._id === idProduct;
+            });
+            if (indiceEncontrado >= 0) {
+                arrayProducts.splice(indiceEncontrado, 1);
+                await this.coleccion.findByIdAndUpdate(idCart, {productos: arrayProducts});
+                resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
+            } else {
+                resultado = "El carrito es correcto pero el producto no existe";
+            }
+        } else {
+            resultado = "El carrito no existe"
+        }
+        return resultado;
     }
 }
 
