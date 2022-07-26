@@ -20,32 +20,48 @@ function DinamicTable () {
         try {
             const response = await fetch ('http://localhost:3001/api/productos', { method: "get" });
             if (!response.ok) {
-                throw new Error ( `HTTP Error: Status ${response.status}`);
+                throw new Error ( `Error en GET: Status ${response.status} - ${response.statusText}`);
             }
-            let actualData = await response.json();
-            setArrayProductos(actualData);
+            let data = await response.json();
+            setArrayProductos(data);
         } catch (error) {
             console.log("Error en el fecth: ", error);
         }
     }
+    const postData = async (productInfo) => {
+        try {
+            const response = await fetch(
+                'http://localhost:3001/api/productos',
+                {
+                    method: "post",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(productInfo)//puede que necesite estar entre llaves
+                }
+            )
+            if (!response.ok) {
+                throw new Error (`Error en POST: ${response.status} - ${response.statusText}`);
+            } else {
+                console.log("POST de producto correcto. Detalles: ", response)
+            }
+        } catch (error) {
+            console.log("Error en el fetch: ", error)
+        }
+    }
     useEffect(() => {
         getData();
-    },[arrayProductos]);
-    function sendProduct (productInfo) {
-        socket.emit('client:product', productInfo);
+    },[]);
+    const handleSubmitProduct = (e) => {
+        e.preventDefault();
+        const timeStamp = new Date();
+        const fechayhora = timeStamp.toLocaleString("fr-FR");
+        const productInfo = { timestamp: fechayhora, nombre: name, description: description, codigo: code, url: direccion, price: price, stock: stock };
+        postData(productInfo);
         setName("");
         setDescription("");
         setCode("");
         setDireccion("");
         setPrice(0);
         setStock(0);
-    }
-    const handleSubmitProduct = (e) => {
-        e.preventDefault();
-        const timeStamp = new Date();
-        const fechayhora = timeStamp.toLocaleString("fr-FR");
-        const productInfo = { timestamp: fechayhora, nombre: name, description: description, codigo: code, url: direccion, price: price, stock: stock };
-        sendProduct(productInfo);
     }
     //return
     return(
