@@ -16,13 +16,20 @@ function DinamicTable () {
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
     //funciones
+    const getData = async () => {
+        try {
+            const response = await fetch ('http://localhost:3001/api/productos', { method: "get" });
+            if (!response.ok) {
+                throw new Error ( `HTTP Error: Status ${response.status}`);
+            }
+            let actualData = await response.json();
+            setArrayProductos(actualData);
+        } catch (error) {
+            console.log("Error en el fecth: ", error);
+        }
+    }
     useEffect(() => {
-        socket.on('server:products', (productos) => {
-            setArrayProductos(productos);
-        });
-        return () => {
-            socket.off();
-        };
+        getData();
     },[arrayProductos]);
     function sendProduct (productInfo) {
         socket.emit('client:product', productInfo);
