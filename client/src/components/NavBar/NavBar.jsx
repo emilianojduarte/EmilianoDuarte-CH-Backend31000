@@ -15,9 +15,11 @@ function NavBar () {
             <nav>
                 <ul>
                     <li>
-                        <Link to={'/'}>Home</Link>
+                        <Link to={'/'}> Home </Link>
                     </li>
-                    <li>Productos</li>
+                    <li>
+                        <Link to={'/productos'}> Productos </Link>
+                    </li>
                     <li>Carrito</li>
                     <li>Login</li>
                 </ul>
