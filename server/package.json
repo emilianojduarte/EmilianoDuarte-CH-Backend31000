@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/server.js",
+  "type": "module",
   "scripts": {
     "start": "node ./server/src/server.js",
     "dev": "nodemon ./server/src/server.js"
@@ -17,7 +18,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "firebase-admin": "^11.0.0",
     "knex": "^2.1.0",
+    "mongoose": "^6.4.6",
     "mysql": "^2.18.1",
     "nanoid": "^4.0.0",
     "socket.io": "^4.5.1",

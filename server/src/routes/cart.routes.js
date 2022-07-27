@@ -1,15 +1,21 @@
 //DECLARACIONES
-const { Router } = require('express');
+import { Router } from "express";
 const router = Router();
 //imports
-const { getNewCart, deleteCart, getCartProducts, postProductToCart, deleteProductFromCart } = require('../controllers/cart.controllers');
+import {
+  getNewCart,
+  deleteCart,
+  getCartProducts,
+  postProductToCart,
+  deleteProductFromCart,
+} from "../controllers/cart.controllers.js";
 
 //ACCIONES
-router.get('/', getNewCart);
-router.delete('/:id', deleteCart);
-router.get('/:id/productos', getCartProducts);
-router.post('/:id/productos', postProductToCart);
-router.delete('/:id/productos/:id_prod', deleteProductFromCart);
+router.get("/", getNewCart);
+router.delete("/:id", deleteCart);
+router.get("/:id/productos", getCartProducts);
+router.post("/:id/productos", postProductToCart);
+router.delete("/:id/productos/:id_prod", deleteProductFromCart);
 
 //export
-module.exports = router; 
+export default router;

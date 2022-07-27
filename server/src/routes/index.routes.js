@@ -1,20 +1,20 @@
-const { Router } = require('express');
+//IMPORTS
+import { Router } from "express";
 const router = Router();
-const productsRoutes = require('./product.routes');
-const cartRoutes = require('./cart.routes');
-const path = require('path');
+import productsRoutes from "./product.routes.js";
+import cartRoutes from "./cart.routes.js";
 //home
-router.get('/home', (req, res) => {
-    try {
-        res.send('Funciona y estás en home')
-    } catch (error) {
-        console.log('Hubo un error al accedor al home', error)
-        res.sendStatus(500).send('Internal server error')
-    }
-})
+router.get("/home", (req, res) => {
+  try {
+    res.send("Funciona y estás en home");
+  } catch (error) {
+    console.log("Hubo un error al accedor al home", error);
+    res.sendStatus(500).send("Internal server error");
+  }
+});
 //productos
-router.use('/productos', productsRoutes);
+router.use("/productos", productsRoutes);
 //carrito
-router.use('/carrito/', cartRoutes);
+router.use("/carrito/", cartRoutes);
 //export
-module.exports = router;
+export default router;
