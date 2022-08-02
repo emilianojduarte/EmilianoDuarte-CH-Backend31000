@@ -3,6 +3,7 @@ import { Router } from "express";
 const router = Router();
 import productsRoutes from "./product.routes.js";
 import cartRoutes from "./cart.routes.js";
+import productstestRoutes from "./products-test.routes.js";
 //home
 router.get("/home", (req, res) => {
   try {
@@ -16,5 +17,7 @@ router.get("/home", (req, res) => {
 router.use("/productos", productsRoutes);
 //carrito
 router.use("/carrito/", cartRoutes);
+//productos-test (creados con Faker)
+router.use("/productos-test", productstestRoutes);
 //export
 export default router;
