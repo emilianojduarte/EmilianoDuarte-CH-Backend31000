@@ -3,7 +3,7 @@ import { Router } from "express";
 const router = Router();
 import productsRoutes from "./product.routes.js";
 import cartRoutes from "./cart.routes.js";
-import productstestRoutes from "./products-test.routes.js";
+import fakeRoutes from "./fake.routes.js";
 //home
 router.get("/home", (req, res) => {
   try {
@@ -18,6 +18,6 @@ router.use("/productos", productsRoutes);
 //carrito
 router.use("/carrito/", cartRoutes);
 //productos-test (creados con Faker)
-router.use("/productos-test", productstestRoutes);
+router.use("/productos-test", fakeRoutes);
 //export
 export default router;

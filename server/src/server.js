@@ -35,9 +35,6 @@ const io = new Server(server, {
   },
 });
 
-//db handlers
-import Mensajes from "./utils/mensages.utils.js";
-const dbMsg = new Mensajes();
 //--------------------------------------------//
 
 //APLICACION
@@ -51,16 +48,18 @@ app.use("/*", (req, res) => {
   });
 });
 
-//io sockets
+//Chat - IO Sockets
+import { addMsg, getAllMsgs } from "./utils/mensages.utils.js";
+//evento
 io.on("connection", async (socket) => {
   //connect
   console.log("Se conectó el cliente con id: ", socket.id);
   //mensajes
-  let arrayMensajes = await dbMsg.getAllMsgs();
+  let arrayMensajes = await getAllMsgs();
   socket.emit("server:msgs", arrayMensajes);
   socket.on("client:msg", async (msgInfo) => {
-    await dbMsg.addMsgToDB(msgInfo);
-    arrayMensajes = await dbMsg.getAllMsgs();
+    await addMsg(msgInfo);
+    arrayMensajes = await getAllMsgs();
     io.emit("server:msgs", arrayMensajes);
   });
   //disconnect
