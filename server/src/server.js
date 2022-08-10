@@ -1,9 +1,11 @@
 //DECLARACIONES
-//express
 import express from "express";
 const app = express();
 import http from "http";
 import cors from "cors";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import MongoStore from "connect-mongo";
 
 //rutas
 import path from "path";
@@ -38,6 +40,23 @@ const io = new Server(server, {
 //--------------------------------------------//
 
 //APLICACION
+
+//sessions (debería moverla a un helper o service?)
+const mongoStoreOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+app.use(cookieParser());
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl: process.env.PAK_MONGO,
+      mongoStoreOptions,
+    }),
+    secret: "CoderHouse",
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: { maxAge: 60000 },
+  })
+);
 
 //rutas
 app.use("/api", rutas);
