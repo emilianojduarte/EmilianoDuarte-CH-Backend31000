@@ -28,14 +28,21 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 //io server y cors
 import { Server } from "socket.io";
-app.use(cors());
+let corOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+app.use(cors(corOptions));
 const server = http.createServer(app);
- const io = new Server(server, {cors: {
-  origin: true,
-   optionsSuccessStatus: 200,
-   credentials: true,
-   methods: ["GET", "POST", "PUT", "DELETE"]
- },});
+const io = new Server(server, {
+  cors: {
+    origin: true,
+    optionsSuccessStatus: 200,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  },
+});
 
 //--------------------------------------------//
 

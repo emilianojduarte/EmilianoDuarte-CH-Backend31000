@@ -9,35 +9,33 @@ function HomePage() {
   const [name, setName] = useState("");
   const [bye, setBye] = useState(false);
   //funciones
-  const checkLogged = async () =>{
+  const checkLogged = async () => {
     try {
       const response = await fetch("http://localhost:3001/api/login", {
         method: "get",
         keepalive: true,
-        credentials: "include"
+        credentials: "include",
       });
       let data = await response.json();
-      console.log("Data en el checklogged: ", data);
-      if (data === undefined){
-        return "Indefinido"
+      if (data === undefined) {
+        return "Indefinido";
       } else {
         setName(data);
         setIsLogued(true);
-        return 
+        return;
       }
     } catch (error) {
       console.log("Error en el fecth: ", error);
     }
-  }
+  };
   const getName = async () => {
-    console.log("Name en getname antes del fecth: ", name)
     try {
       const response = await fetch(
         `http://localhost:3001/api/login?name=${name}`,
         {
           method: "post",
           keepalive: true,
-          credentials: "include"
+          credentials: "include",
         }
       );
       let data = await response.json();
@@ -49,17 +47,14 @@ function HomePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await getName();
-    console.log("Data en el handle submit", data);
     setName(data);
     setIsLogued(true);
   };
   const handleLogOff = async () => {
-    console.log("entro en el handle log off")
     try {
       const response = await fetch(`http://localhost:3001/api/login`, {
         method: "delete",
-        keepalive: true,
-        credentials: "include"
+        credentials: "include",
       });
       if (!response.ok) {
         throw new Error(
@@ -73,9 +68,7 @@ function HomePage() {
     }
   };
   useEffect(() => {
-    checkLogged().then(data => {
-      console.log("Data: ", data)
-    });
+    checkLogged();
   }, [isLogged, bye]);
   return (
     <>

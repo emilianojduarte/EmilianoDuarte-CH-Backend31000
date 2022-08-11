@@ -1,6 +1,6 @@
 //DECLARACIONES
 import { Router } from "express";
-const router = Router ();
+const router = Router();
 //imports
 import getProducts from "../controllers/fake.controller.js";
 

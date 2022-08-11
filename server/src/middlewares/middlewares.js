@@ -3,12 +3,10 @@ const checkAuthorization = (req, res, next) => {
   if (req.body.administrador) {
     next();
   } else {
-    res
-      .status(403)
-      .send({
-        error: -1,
-        descripcion: `Ruta ${req.url} con método ${req.method} no autorizada`,
-      });
+    res.status(403).send({
+      error: -1,
+      descripcion: `Ruta ${req.url} con método ${req.method} no autorizada`,
+    });
   }
 };
 

@@ -17,7 +17,7 @@ switch (process.env.DATABASE) {
     );
     const { default: MensajeDaoMongo } = await import(
       "./mensajes/mongo.mensajes.daos.js"
-    )
+    );
     ProductDao = new ProductDaoMongo();
     CartDao = new CartDaoMongo();
     MensajeDao = new MensajeDaoMongo();

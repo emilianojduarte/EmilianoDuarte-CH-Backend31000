@@ -13,6 +13,6 @@ router.use("/carrito/", cartRoutes);
 //productos-test (creados con Faker)
 router.use("/productos-test", fakeRoutes);
 //login
-router.use("/login", loginRoutes)
+router.use("/login", loginRoutes);
 //export
 export default router;
