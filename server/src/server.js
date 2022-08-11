@@ -30,12 +30,12 @@ app.use(express.static(path.join(__dirname, "../public")));
 import { Server } from "socket.io";
 app.use(cors());
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  },
-});
+ const io = new Server(server, {cors: {
+  origin: true,
+   optionsSuccessStatus: 200,
+   credentials: true,
+   methods: ["GET", "POST", "PUT", "DELETE"]
+ },});
 
 //--------------------------------------------//
 
@@ -54,7 +54,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     rolling: true,
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 180000 },
   })
 );
 
@@ -72,7 +72,7 @@ import { addMsg, getAllMsgs } from "./utils/mensages.utils.js";
 //evento
 io.on("connection", async (socket) => {
   //connect
-  console.log("Se conectó el cliente con id: ", socket.id);
+  //console.log("Se conectó el cliente con id: ", socket.id);
   //mensajes
   let arrayMensajes = await getAllMsgs();
   socket.emit("server:msgs", arrayMensajes);

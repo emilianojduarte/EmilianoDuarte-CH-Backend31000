@@ -1,18 +1,110 @@
 //Componentes
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chat from "../components/Chat/Chat";
 //Estilos
 import "./HomePage.css";
 
 function HomePage() {
-  const isLogged = false;
+  const [isLogged, setIsLogued] = useState(false);
   const [name, setName] = useState("");
-
+  const [bye, setBye] = useState(false);
+  //funciones
+  const checkLogged = async () =>{
+    try {
+      const response = await fetch("http://localhost:3001/api/login", {
+        method: "get",
+        keepalive: true,
+        credentials: "include"
+      });
+      let data = await response.json();
+      console.log("Data en el checklogged: ", data);
+      if (data === undefined){
+        return "Indefinido"
+      } else {
+        setName(data);
+        setIsLogued(true);
+        return 
+      }
+    } catch (error) {
+      console.log("Error en el fecth: ", error);
+    }
+  }
+  const getName = async () => {
+    console.log("Name en getname antes del fecth: ", name)
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/login?name=${name}`,
+        {
+          method: "post",
+          keepalive: true,
+          credentials: "include"
+        }
+      );
+      let data = await response.json();
+      return data;
+    } catch (error) {
+      console.log("Error en el fecth: ", error);
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = await getName();
+    console.log("Data en el handle submit", data);
+    setName(data);
+    setIsLogued(true);
+  };
+  const handleLogOff = async () => {
+    console.log("entro en el handle log off")
+    try {
+      const response = await fetch(`http://localhost:3001/api/login`, {
+        method: "delete",
+        keepalive: true,
+        credentials: "include"
+      });
+      if (!response.ok) {
+        throw new Error(
+          `Error en GET: Status ${response.status} - ${response.statusText}`
+        );
+      }
+      setIsLogued(false);
+      setBye(true);
+    } catch (error) {
+      console.log("Ocurrio el siguente error en el handleLogOff", error);
+    }
+  };
+  useEffect(() => {
+    checkLogged().then(data => {
+      console.log("Data: ", data)
+    });
+  }, [isLogged, bye]);
   return (
     <>
       <h1>Home</h1>
       {isLogged ? (
-        <Chat />
+        <>
+          <section className="sect">
+            <div>
+              <p>Bienvenido {name}!</p>
+              <button
+                type="button"
+                onClick={handleLogOff}
+                className="btn btn-dark"
+              >
+                Desloguearse
+              </button>
+            </div>
+          </section>
+          <Chat />
+        </>
+      ) : bye ? (
+        <section className="sect">
+          <div>
+            <p>Adios {name}!</p>
+            {setTimeout(() => {
+              setBye(false);
+            }, 2000)}
+          </div>
+        </section>
       ) : (
         <section className="sect">
           <h2>Login de usuario</h2>
@@ -22,7 +114,7 @@ function HomePage() {
               id="loginForm"
               autoComplete="off"
               className="col-10"
-              onSubmit=""
+              onSubmit={handleSubmit}
             >
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
