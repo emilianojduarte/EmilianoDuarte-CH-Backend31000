@@ -6,6 +6,11 @@ import cors from "cors";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import hashPassword from "./helpers/hashpassword.helpers.js";
+import checkPassword from "./helpers/checkpassword.helpers.js";
+import { UserDao } from "./daos/index.daos.js";
 
 //rutas
 import path from "path";
@@ -64,7 +69,62 @@ app.use(
     cookie: { maxAge: 600000 },
   })
 );
-
+app.use(passport.initialize());
+app.use(passport.session());
+const registerStrategy = new LocalStrategy(
+  { passReqToCallback: true },
+  async (req, username, password, done) => {
+    try {
+      const existingUser = await UserDao.existe({username: username});
+      if (existingUser) {
+        return done({ error: true, message: "El usuario ya existe" }, null);
+      }
+      const newUser = {
+        username: username,
+        password: hashPassword(password),
+      };
+      const createdUser = await UserDao.guardar(newUser);
+      console.log("Created USer: ", createdUser);
+      done({ok: true}, createdUser);
+    } catch (error) {
+      console.log("Ocurrio el siguiente error registrando el usuario: ", error);
+      done("Error en el registro", null);
+    }
+  }
+);
+const loginStrategy = new LocalStrategy(async (username, password, done) => {
+  try {
+    const user = await UserDao.existe({username: username});
+    if (!user || !checkPassword(password, user.password)) {
+      return done(null, null);
+    }
+    done(null, user);
+  } catch (error) {
+    console.log("Ocurrio el siguiente error en el login: ", error);
+    done("Error login", null);
+  }
+});
+passport.use("register", registerStrategy);
+passport.use("login", loginStrategy);
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+passport.deserializeUser((id, done) => {
+  console.log("Entró en el deserialize");
+  UserDao.listarUno(id, function(error, user){
+    console.log("Entró en el callback del deserialize");
+    console.log("user en el callback: ", user); 
+    done(error, user);
+  });
+});
+app.post(
+  "/register",
+  passport.authenticate("register")
+);
+app.get(
+  "/login",
+  passport.authenticate("login")
+);
 //rutas
 app.use("/api", rutas);
 app.use("/*", (req, res) => {

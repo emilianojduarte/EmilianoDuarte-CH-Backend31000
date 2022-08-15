@@ -1,5 +1,3 @@
-//imports
-
 //funciones
 const postLogIn = (req, res) => {
   try {
