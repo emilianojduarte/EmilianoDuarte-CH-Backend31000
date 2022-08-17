@@ -9,7 +9,6 @@ const postLogIn = (req, res) => {
 };
 const getLogIn = async (req, res) => {
   try {
-    console.log("usuario en session: ", req.session.user);
     let nombre = req.session.user;
     res.json(nombre);
   } catch (error) {
