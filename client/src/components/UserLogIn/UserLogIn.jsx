@@ -49,19 +49,17 @@ function UserLogIn() {
     //const data = await postLogIn(credentials);
     postLogIn(credentials)
       .then((res) => {
-        console.log("Data despues de loging: ", res);
         return res.json();
       })
       .then((res) => {
-        console.log("Res despues del json: ", res);
         setName(res);
+        setIsLogued(true);
+        setmailForm("");
+        setPassForm("");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Error en el fecth post loging: ", error);
       });
-    setIsLogued(true);
-    setmailForm("");
-    setPassForm("");
   };
   const handleLogOff = async () => {
     try {

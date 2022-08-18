@@ -8,8 +8,7 @@ import "./HomePage.css";
 function HomePage() {
   const [isLogged, setIsLogued] = useState(false);
   //funciones
-  useEffect(() => {
-  }, [isLogged]);
+  useEffect(() => {}, [isLogged]);
   return (
     <>
       <h1>Home</h1>
