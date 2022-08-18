@@ -6,6 +6,8 @@ import "./UserLogIn.css";
 function UserLogIn() {
   //variables
   const [name, setName] = useState("");
+  const [mailForm, setmailForm] = useState("");
+  const [passForm, setPassForm] = useState("");
   const [bye, setBye] = useState(false);
   const [isLogged, setIsLogued] = useState(false);
   //funciones
@@ -17,7 +19,6 @@ function UserLogIn() {
         credentials: "include",
       });
       let data = await response.json();
-      console.log("Data en UserLogIn: ", data);
       if (data === undefined) {
         return "Indefinido";
       } else {
@@ -29,27 +30,38 @@ function UserLogIn() {
       console.log("Error en el fecth: ", error);
     }
   };
-  const getName = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3001/api/login?name=${name}`,
-        {
-          method: "post",
-          keepalive: true,
-          credentials: "include",
-        }
-      );
-      let data = await response.json();
-      return data;
-    } catch (error) {
-      console.log("Error en el fecth: ", error);
-    }
+  const postLogIn = async (credentials) => {
+    const response = await fetch(`http://localhost:3001/login`, {
+      method: "post",
+      keepalive: true,
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+    return response;
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await getName();
-    setName(data);
+    let credentials = { username: mailForm, password: passForm };
+    //const data = await postLogIn(credentials);
+    postLogIn(credentials)
+      .then((res) => {
+        console.log("Data despues de loging: ", res);
+        return res.json();
+      })
+      .then((res) => {
+        console.log("Res despues del json: ", res);
+        setName(res);
+      })
+      .catch(error => {
+        console.log("Error en el fecth post loging: ", error);
+      });
     setIsLogued(true);
+    setmailForm("");
+    setPassForm("");
   };
   const handleLogOff = async () => {
     try {
@@ -69,7 +81,7 @@ function UserLogIn() {
     }
   };
   useEffect(() => {
-    checkLogged();
+    //checkLogged();
   }, [isLogged]);
   return (
     <>
@@ -108,7 +120,7 @@ function UserLogIn() {
             >
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
-                  Nombre
+                  Email/Usuario
                 </label>
                 <input
                   id="nameInput"
@@ -116,15 +128,31 @@ function UserLogIn() {
                   className="form-control"
                   placeholder="Ingrese su nombre"
                   name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={mailForm}
+                  onChange={(e) => setmailForm(e.target.value)}
+                  maxLength="30"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">
+                  Password
+                </label>
+                <input
+                  id="passInput"
+                  type="password"
+                  className="form-control"
+                  placeholder="Ingrese su contraseña"
+                  name="pass"
+                  value={passForm}
+                  onChange={(e) => setPassForm(e.target.value)}
                   maxLength="30"
                   required
                 />
               </div>
               <div className="mb-3">
                 <button type="submit" className="btn btn-dark">
-                  Enviar
+                  Ingresar
                 </button>
                 <button type="reset" className="btn btn-dark">
                   Limpiar

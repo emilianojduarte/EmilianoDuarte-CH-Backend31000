@@ -84,7 +84,6 @@ const registerStrategy = new LocalStrategy(
         password: hashPassword(password),
       };
       const createdUser = await UserDao.guardar(newUser);
-      console.log("Created USer: ", createdUser);
       done({ok: true}, createdUser);
     } catch (error) {
       console.log("Ocurrio el siguiente error registrando el usuario: ", error);
@@ -96,9 +95,10 @@ const loginStrategy = new LocalStrategy(async (username, password, done) => {
   try {
     const user = await UserDao.existe({username: username});
     if (!user || !checkPassword(password, user.password)) {
+      console.log("LoginStrategy. No validó");
       return done(null, null);
     }
-    done(null, user);
+    return done(null, user);
   } catch (error) {
     console.log("Ocurrio el siguiente error en el login: ", error);
     done("Error login", null);
@@ -110,10 +110,7 @@ passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 passport.deserializeUser((id, done) => {
-  console.log("Entró en el deserialize");
   UserDao.listarUno(id, function(error, user){
-    console.log("Entró en el callback del deserialize");
-    console.log("user en el callback: ", user); 
     done(error, user);
   });
 });
@@ -121,9 +118,17 @@ app.post(
   "/register",
   passport.authenticate("register")
 );
-app.get(
+app.post(
   "/login",
-  passport.authenticate("login")
+  passport.authenticate("login"),
+  (req, res)=>{
+    if (req.isAuthenticated()){
+      let user = req.user;
+      res.json(user.username);
+    }else{
+      console.log("no está autenticado")
+    }
+  }
 );
 //rutas
 app.use("/api", rutas);
