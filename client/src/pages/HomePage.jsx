@@ -6,20 +6,25 @@ import UserLogIn from "../components/UserLogIn/UserLogIn";
 import "./HomePage.css";
 
 function HomePage() {
-  const [isLogged, setIsLogued] = useState(false);
+  const [logged, setLogged] = useState(false)
+  const setShowChat = (mostrar) => {
+    if (mostrar) {
+      setLogged(true)
+    }
+  }
   //funciones
-  useEffect(() => {}, [isLogged]);
+  useEffect(() => {}, [logged]);
   return (
     <>
       <h1>Home</h1>
-      {isLogged ? (
+      {logged ? (
         <>
-          <UserLogIn />
+          <UserLogIn revisarMostrar={setShowChat}/>
           <Chat />
         </>
       ) : (
         <>
-          <UserLogIn />
+          <UserLogIn revisarMostrar={setShowChat}/>
         </>
       )}
     </>

@@ -84,10 +84,10 @@ const registerStrategy = new LocalStrategy(
         password: hashPassword(password),
       };
       const createdUser = await UserDao.guardar(newUser);
-      done({ok: true}, createdUser);
+      return done(null, createdUser);
     } catch (error) {
       console.log("Ocurrio el siguiente error registrando el usuario: ", error);
-      done("Error en el registro", null);
+      return done("Error en el registro", null);
     }
   }
 );
@@ -95,7 +95,6 @@ const loginStrategy = new LocalStrategy(async (username, password, done) => {
   try {
     const user = await UserDao.existe({username: username});
     if (!user || !checkPassword(password, user.password)) {
-      console.log("LoginStrategy. No validó");
       return done(null, null);
     }
     return done(null, user);
@@ -116,7 +115,11 @@ passport.deserializeUser((id, done) => {
 });
 app.post(
   "/register",
-  passport.authenticate("register")
+  passport.authenticate("register"),
+  (req, res) => {
+    let mensaje = "Usuario creado correctamente";
+    res.send({ok: true, mensaje});
+  }
 );
 app.post(
   "/login",
@@ -127,6 +130,30 @@ app.post(
       res.json(user.username);
     }else{
       console.log("no está autenticado")
+    }
+  }
+);
+// app.get(
+//   "/login",
+//   (req, res)=>{
+//     if (req.user){
+//       let user = req.user;
+//       res.json(user.username);
+//     }else{
+//       res.send("No se encuentra autenticado");
+//     }
+//   }
+// );
+app.get("/logoff", (req, res) => {
+    try{
+      console.log("Entró en el delete");
+      req.session.destroy((error)=>{
+        console.log("error en el callback del destroy: ", error);
+      });
+      res.send({ok: true, mensaje: "Sesion Cerrada"})
+      return
+    }catch (error){
+      console.log("Ocurrio erro en login delete: ", error)
     }
   }
 );
@@ -141,6 +168,7 @@ app.use("/*", (req, res) => {
 
 //Chat - IO Sockets
 import { addMsg, getAllMsgs } from "./utils/mensages.utils.js";
+import { send } from "process";
 //evento
 io.on("connection", async (socket) => {
   //connect
