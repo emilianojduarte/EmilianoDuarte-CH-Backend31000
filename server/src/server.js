@@ -168,7 +168,6 @@ app.use("/*", (req, res) => {
 
 //Chat - IO Sockets
 import { addMsg, getAllMsgs } from "./utils/mensages.utils.js";
-import { send } from "process";
 //evento
 io.on("connection", async (socket) => {
   //connect

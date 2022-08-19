@@ -80,30 +80,33 @@ function UserLogIn({ revisarMostrar }) {
         }
       });
   };
-  const getLogOff = () => {
-      console.log("entró en el getlogoff");
-      const response = fetch(`http://localhost:3001/logoff`, {
-        method: "get",
-        credentials: "include",
-        keepalive: true,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8'
-         },
-      });
-      return response;
-  }
+  const getLogOff = async () => {
+    console.log("entró en el getlogoff");
+    const response = await fetch(`http://localhost:3001/logoff`, {
+      method: "get",
+      credentials: "include",
+      keepalive: true,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    return response;
+  };
   const handleLogOff = () => {
-      getLogOff()
+    getLogOff()
       .then((res) => {
         console.log("Response: ", res);
         let data = res.json();
+        console.log("data: ", data);
         if (data.ok) {
           setBye(true);
-          return
+          return;
         }
       })
-      .catch(error => { console.log("Ocurrio el siguente error en el handleLogOff", error); })
-    }
+      .catch((error) => {
+        console.log("Ocurrio el siguente error en el handleLogOff", error);
+      });
+  };
   const activateSingUp = (e) => {
     e.preventDefault();
     setErrorLoggin(false);
@@ -119,7 +122,7 @@ function UserLogIn({ revisarMostrar }) {
         return res.json();
       })
       .then((info) => {
-        if (info.ok === true){
+        if (info.ok === true) {
           setmailForm("");
           setPassForm("");
           setRegister(false);
@@ -265,7 +268,13 @@ function UserLogIn({ revisarMostrar }) {
                 />
               </div>
               <div className="mb-3">
-              <button type="button" className="btn btn-dark" onClick={(e) => { window.location.reload(true) }}>
+                <button
+                  type="button"
+                  className="btn btn-dark"
+                  onClick={(e) => {
+                    window.location.reload(true);
+                  }}
+                >
                   Reresar al LogIn
                 </button>
                 <button type="submit" className="btn btn-dark">
@@ -332,9 +341,7 @@ function UserLogIn({ revisarMostrar }) {
                 </button>
               </div>
               <div>
-                <p>
-                  Usuario registrado correctamente. Ahora puede loguearse.
-                </p>
+                <p>Usuario registrado correctamente. Ahora puede loguearse.</p>
               </div>
             </form>
             <div className="col-1"></div>
