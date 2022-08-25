@@ -1,5 +1,5 @@
 //Componentes
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 //Estilos
 
 function InfoPage() {
@@ -19,7 +19,7 @@ function InfoPage() {
     return data;
   };
   useEffect(() => {
-    getInfo().then((data) => console.log(data));
+    getInfo();
   }, []);
   return (
     <>
@@ -46,7 +46,7 @@ function InfoPage() {
         <p>
           Args
           <br></br>
-          _: {args._[0]}
+          _: {args._}
           <br></br>
           $0: {args.$0}
         </p>
