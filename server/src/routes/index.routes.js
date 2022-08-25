@@ -5,6 +5,7 @@ import productsRoutes from "./product.routes.js";
 import cartRoutes from "./cart.routes.js";
 import fakeRoutes from "./fake.routes.js";
 import loginRoutes from "./login.routes.js";
+import infoRoutes from "./info.routes.js";
 
 //productos
 router.use("/productos", productsRoutes);
@@ -14,5 +15,7 @@ router.use("/carrito/", cartRoutes);
 router.use("/productos-test", fakeRoutes);
 //login
 router.use("/login", loginRoutes);
+//info
+router.use("/info", infoRoutes);
 //export
 export default router;
