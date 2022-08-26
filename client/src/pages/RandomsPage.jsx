@@ -20,16 +20,11 @@ function RandomsPage() {
         }
       );
       data = await response.json();
-      console.log("Data en search: ", data)
     } else {
-      const response = await fetch(
-        `http://localhost:3001/api/randoms`,
-        {
+      const response = await fetch(`http://localhost:3001/api/randoms`, {
         method: "get",
-        }
-      );
+      });
       data = await response.json();
-      console.log("Data sin el search: ", data)
     }
     return data;
   };
