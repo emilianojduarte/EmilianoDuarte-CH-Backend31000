@@ -21,6 +21,9 @@ function NavBar() {
           <li>
             <Link to={"/info"}> Info </Link>
           </li>
+          <li>
+            <Link to={"/randoms"}> Randoms </Link>
+          </li>
           <li>Carrito</li>
           <li>Login</li>
         </ul>

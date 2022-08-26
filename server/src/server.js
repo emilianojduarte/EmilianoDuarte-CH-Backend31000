@@ -11,7 +11,6 @@ import { Strategy as LocalStrategy } from "passport-local";
 import hashPassword from "./helpers/hashpassword.helpers.js";
 import checkPassword from "./helpers/checkpassword.helpers.js";
 import { UserDao } from "./daos/index.daos.js";
-
 //rutas
 import path from "path";
 import { fileURLToPath } from "url";
