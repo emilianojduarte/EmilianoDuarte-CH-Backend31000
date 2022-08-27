@@ -1,6 +1,7 @@
 //Componentes
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 //Estilos
 
 function RandomsPage() {
@@ -13,18 +14,11 @@ function RandomsPage() {
   const getInfo = async () => {
     let data;
     if (search) {
-      const response = await fetch(
-        `http://localhost:3001/api/randoms${search}`,
-        {
-          method: "get",
-        }
-      );
-      data = await response.json();
+      const response = await axios.get(`http://localhost:3001/api/randoms${search}`);
+      data = await response.data;
     } else {
-      const response = await fetch(`http://localhost:3001/api/randoms`, {
-        method: "get",
-      });
-      data = await response.json();
+      const response = await axios.get(`http://localhost:3001/api/randoms`);
+      data = await response.data;
     }
     return data;
   };

@@ -1,5 +1,6 @@
 //Componentes
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 //Estilos
 import "./UserLogIn.css";
 
@@ -27,17 +28,8 @@ function UserLogIn({ revisarMostrar }) {
   //   return data;
   // };
   const postLogIn = async (credentials) => {
-    const response = await fetch(`http://localhost:3001/login`, {
-      method: "post",
-      keepalive: true,
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    });
-    return response;
+    const response = await axios.post("http://localhost:3001/login", credentials);
+    return response.data;
   };
   const postSingUp = async (datos) => {
     const response = await fetch(`http://localhost:3001/register`, {
@@ -57,12 +49,11 @@ function UserLogIn({ revisarMostrar }) {
     let credentials = { username: mailForm, password: passForm };
     postLogIn(credentials)
       .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
         if (res === "Unauthorized") {
+          console.log("Entró en error de credenciales")
           setErrorLoggin(true);
         }
+        console.log("pasó la validación");
         setName(res);
         revisarMostrar(true);
         setIsLogued(true);
@@ -82,25 +73,15 @@ function UserLogIn({ revisarMostrar }) {
   };
   const getLogOff = async () => {
     console.log("entró en el getlogoff");
-    const response = await fetch(`http://localhost:3001/logoff`, {
-      method: "get",
-      credentials: "include",
-      keepalive: true,
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
-    return response;
+    const response = await axios.get(`http://localhost:3001/logoff`);
+    return response.data;
   };
   const handleLogOff = () => {
     getLogOff()
-      .then((res) => {
-        console.log("Response: ", res);
-        let data = res.json();
+      .then((data) => {
         console.log("data: ", data);
         if (data.ok) {
           setBye(true);
-          return;
         }
       })
       .catch((error) => {
@@ -140,7 +121,16 @@ function UserLogIn({ revisarMostrar }) {
   }, [isLogged, errorLoggin, register, bye, registerOK]);
   return (
     <>
-      {isLogged ? (
+      {bye ? (
+        <section className="sect">
+          <div>
+            <p>Adios {name}!</p>
+            {setTimeout(() => {
+              window.location.reload(true);
+            }, 2000)}
+          </div>
+        </section>
+      ) : isLogged ? (
         <section className="sect">
           <div>
             <p>Bienvenido {name}!</p>
@@ -151,15 +141,6 @@ function UserLogIn({ revisarMostrar }) {
             >
               Desloguearse
             </button>
-          </div>
-        </section>
-      ) : bye ? (
-        <section className="sect">
-          <div>
-            <p>Adios {name}!</p>
-            {setTimeout(() => {
-              window.location.reload(true);
-            }, 2000)}
           </div>
         </section>
       ) : errorLoggin ? (
