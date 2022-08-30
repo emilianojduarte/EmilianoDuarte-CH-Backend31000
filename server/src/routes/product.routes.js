@@ -9,15 +9,13 @@ import {
   putProduct,
   deleteProduct,
 } from "../controllers/products.controllers.js";
-//import de midlewares
-import { checkAuthorization } from "../middlewares/middlewares.js";
 
 //ACCIONES
 router.get("/", getProducts);
 router.get("/:id", getProduct);
-router.post("/", checkAuthorization, postProduct);
-router.put("/:id", checkAuthorization, putProduct);
-router.delete("/:id", checkAuthorization, deleteProduct);
+router.post("/", postProduct);
+router.put("/:id", putProduct);
+router.delete("/:id", deleteProduct);
 
 //export
 export default router;

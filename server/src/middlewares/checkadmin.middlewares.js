@@ -1,4 +1,4 @@
-const checkAuthorization = (req, res, next) => {
+const checkAdmin = (req, res, next) => {
   req.body.administrador = true;
   if (req.body.administrador) {
     next();
@@ -10,4 +10,4 @@ const checkAuthorization = (req, res, next) => {
   }
 };
 
-export { checkAuthorization };
+export { checkAdmin };

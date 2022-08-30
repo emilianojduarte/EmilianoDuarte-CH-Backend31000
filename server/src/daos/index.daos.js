@@ -5,6 +5,7 @@ dotenv.config();
 let ProductDao;
 let CartDao;
 let MensajeDao;
+let UserDao;
 
 //SWTICH DE ASIGNACION
 switch (process.env.DATABASE) {
@@ -18,9 +19,13 @@ switch (process.env.DATABASE) {
     const { default: MensajeDaoMongo } = await import(
       "./mensajes/mongo.mensajes.daos.js"
     );
+    const { default: UserDaoMongo } = await import(
+      "./usuarios/mongo.usuarios.daos.js"
+    );
     ProductDao = new ProductDaoMongo();
     CartDao = new CartDaoMongo();
     MensajeDao = new MensajeDaoMongo();
+    UserDao = new UserDaoMongo();
     break;
   case "firebase":
     const { default: ProductDaoFirebase } = await import(
@@ -32,10 +37,14 @@ switch (process.env.DATABASE) {
     const { default: MensajeDaoFirebase } = await import(
       "./mensajes/firebase.mensajes.daos.js"
     );
+    const { default: UserDaoFirebase } = await import(
+      "./usuarios/firebase.usuarios.daos.js"
+    );
     ProductDao = new ProductDaoFirebase();
     CartDao = new CartDaoFirebase();
     MensajeDao = new MensajeDaoFirebase();
+    UserDao = new UserDaoFirebase();
     break;
 }
 
-export { ProductDao, CartDao, MensajeDao };
+export { ProductDao, CartDao, MensajeDao, UserDao };

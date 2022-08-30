@@ -28,6 +28,11 @@ class ContenedorMongo {
     return nuevoElementoGuardado;
   }
 
+  async existe(elemento) {
+    let resultado = this.coleccion.findOne(elemento);
+    return resultado;
+  }
+
   async actualizar(id, elemento) {
     let resultado;
     await this.coleccion
