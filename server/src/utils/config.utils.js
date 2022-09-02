@@ -6,7 +6,7 @@ const args = Yargs(process.argv.slice(2)).alias({
     p: 'password'
 }).default({
     port: 3001,
-    mode: 'cluster',
+    mode: 'fork',
 }).argv
 
 let config = {

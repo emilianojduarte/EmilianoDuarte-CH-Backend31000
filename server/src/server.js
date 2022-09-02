@@ -56,7 +56,8 @@ const io = new Server(server, {
 //--------------------------------------------//
 
 //APLICACION
-
+console.log("Antes de entrar al if. Config.mode: ", config.mode);
+console.log("Antes de entrar al if. Cluster primary: ", cluster.isPrimary);
 if (config.mode === "cluster" && cluster.isPrimary) {
   console.log("Entró en cluster y primary");
   os.cpus().map(() => {
@@ -67,6 +68,7 @@ if (config.mode === "cluster" && cluster.isPrimary) {
     cluster.fork();
   });
 } else {
+  console.log("Entró en el else");
   //sessions (debería moverla a un helper o service?)
   const mongoStoreOptions = { useNewUrlParser: true, useUnifiedTopology: true };
   app.use(cookieParser());
