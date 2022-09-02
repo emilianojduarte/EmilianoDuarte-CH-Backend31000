@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import InfoPage from "./InfoPage";
 //Estilos
 
 function RandomsPage() {
@@ -32,6 +33,7 @@ function RandomsPage() {
   }, [dibujar]);
   return (
     <>
+      <InfoPage />
       <h2>Randoms</h2>
       <div>
         {dibujar ? (
