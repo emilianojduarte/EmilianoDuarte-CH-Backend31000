@@ -1,3 +1,5 @@
+//IMPORTS
+import logger from "./logger.utils.js";
 //Clase contenedora
 import { MensajeDao } from "../daos/index.daos.js";
 //normalizr
@@ -15,10 +17,7 @@ const addMsg = async (msgInfo) => {
   try {
     await MensajeDao.guardar(msgInfo);
   } catch (error) {
-    console.log(
-      "Ocurrio el siguiente error al querer agregar un producto",
-      error
-    );
+    logger.error(`Ocurrio el siguiente error al querer agregar un producto: ${error}`);
   }
 };
 const getAllMsgs = async () => {
@@ -30,10 +29,7 @@ const getAllMsgs = async () => {
     );
     return resultadoNormalizado;
   } catch (error) {
-    console.log(
-      "Ocurrio el siguiente error al querer obtener los productos",
-      error
-    );
+    logger.error(`Ocurrio el siguiente error al querer obtener todos los mensajes: ${error}`);
   }
 };
 
