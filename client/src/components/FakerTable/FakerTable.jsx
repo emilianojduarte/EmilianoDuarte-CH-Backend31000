@@ -10,7 +10,7 @@ function FakerTable() {
   //funciones
   const getData = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/productos-test", {
+      const response = await fetch("http://localhost:3010/api/productos-test", {
         method: "get",
       });
       if (!response.ok) {

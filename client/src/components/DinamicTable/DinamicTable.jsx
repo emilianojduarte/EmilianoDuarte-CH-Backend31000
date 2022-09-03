@@ -15,7 +15,7 @@ function DinamicTable() {
   //funciones
   const getData = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/productos", {
+      const response = await fetch("http://localhost:3010/api/productos", {
         method: "get",
       });
       if (!response.ok) {
@@ -31,7 +31,7 @@ function DinamicTable() {
   };
   const postData = async (productInfo) => {
     try {
-      const response = await fetch("http://localhost:3001/api/productos", {
+      const response = await fetch("http://localhost:3010/api/productos", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(productInfo), //este ya es un object, por eso no necesita estar entre llaves

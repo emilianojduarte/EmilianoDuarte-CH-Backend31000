@@ -9,7 +9,7 @@ function InfoPage() {
   const [args, setArgs] = useState({});
   //funciones
   const getInfo = async () => {
-    const response = await fetch("http://localhost:3001/api/info", {
+    const response = await fetch("http://localhost:3010/api/info", {
       method: "get",
     });
     let data = await response.json();

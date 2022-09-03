@@ -12,7 +12,7 @@ function ProductPage() {
   const getProduct = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/productos/${id}`,
+        `http://localhost:3010/api/productos/${id}`,
         { method: "get" }
       );
       if (!response.ok) {
