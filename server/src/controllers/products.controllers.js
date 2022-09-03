@@ -1,5 +1,6 @@
 //clase contenedora del archivo para la persistencia
 import { ProductDao } from "../daos/index.daos.js";
+import logger from "../utils/logger.utils.js";
 
 //funciones
 const getProducts = async (req, res) => {
@@ -7,10 +8,7 @@ const getProducts = async (req, res) => {
     const resultado = await ProductDao.listarTodos();
     res.send(resultado);
   } catch (error) {
-    console.log(
-      "Ocurrio el siguiente error al querer obtener los productos",
-      error
-    );
+    logger.error(`Ocurrio el siguiente error al querer obtener los productos: ${error}`);
     res.sendStatus(500);
   }
 };
@@ -23,10 +21,7 @@ const getProduct = async (req, res) => {
       res.send(resultado);
     }
   } catch (error) {
-    console.log(
-      "Ocurrio el siguiente error al querer obtener un producto",
-      error
-    );
+    logger.error(`Ocurrio el siguiente error al querer obtener el producto: ${error}`);
     res.sendStatus(500);
   }
 };
@@ -35,10 +30,7 @@ const postProduct = async (req, res) => {
     await ProductDao.guardar(req.body);
     res.sendStatus(200);
   } catch (error) {
-    console.log(
-      "Ocurrio el siguiente error al querer agregar un producto",
-      error
-    );
+    logger.error(`Ocurrio el siguiente error al querer agregar un producto: ${error}`);
     res.sendStatus(500);
   }
 };
@@ -51,10 +43,7 @@ const putProduct = async (req, res) => {
       res.sendStatus(200);
     }
   } catch (error) {
-    console.log(
-      "Ocurrio el siguiente error al querer actualizar el producto",
-      error
-    );
+    logger.error(`Ocurrio el siguiente error al querer actualizar el producto: ${error}`);
     res.sendStatus(500);
   }
 };
@@ -67,10 +56,7 @@ const deleteProduct = async (req, res) => {
       res.sendStatus(200);
     }
   } catch (error) {
-    console.log(
-      "Ocurrio el siguiente error al querer eliminar el producto",
-      error
-    );
+    logger.error(`Ocurrio el siguiente error al querer eliminar el producto: ${error}`);
     res.sendStatus(500);
   }
 };

@@ -16,6 +16,10 @@ import config  from "./utils/config.utils.js";
 import cluster from "cluster";
 import os from "os";
 
+//middlwares
+import { loggerInfo } from "./middlewares/loggerInfo.middlewares.js";
+import { loggerWarn } from "./middlewares/loggerWarn.middlewares.js";
+
 //rutas
 import path from "path";
 import { fileURLToPath } from "url";
@@ -168,8 +172,8 @@ if (config.mode === "cluster" && cluster.isPrimary) {
     }
   });
   //rutas
-  app.use("/api", rutas);
-  app.use("/*", (req, res) => {
+  app.use("/api", loggerInfo, rutas);
+  app.use("/*", loggerWarn, (req, res) => {
     res.status(404).send({
       error: -2,
       descripcion: `Ruta ${req.url} con método ${req.method} aún no implementada`,
