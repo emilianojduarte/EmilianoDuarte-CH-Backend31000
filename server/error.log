@@ -1,0 +1,1 @@
+{"level":"error","message":"Ocurrio el siguiente error al querer obtener el producto: CastError: Cast to ObjectId failed for value \"123\" (type string) at path \"_id\" for model \"productos\""}
